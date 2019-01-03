@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestCityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" />
+    <Property Name="CitySize" Type="int" />
+    <Property Name="UserID" Type="int" />
+  </EntityType>
+  <EntityType Name="CitiesHaveBuildings">
+    <Key>
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="BuildingID" Type="int" Nullable="false" />
+    <Property Name="BuildingValue" Type="int" />
+  </EntityType>
+  <EntityType Name="CitiesHavePopulation">
+    <Key>
+      <PropertyRef Name="PUID" />
+    </Key>
+    <Property Name="PUID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PUModifier" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="RaceID" Type="int" />
+  </EntityType>
+  <EntityType Name="CitiesHaveTechnology">
+    <Key>
+      <PropertyRef Name="CityID" />
+      <PropertyRef Name="TechnologyID" />
+    </Key>
+    <Property Name="CityID" Type="int" Nullable="false" />
+    <Property Name="TechnologyID" Type="int" Nullable="false" />
+    <Property Name="TechnologyBoolStatus" Type="int" />
+    <Property Name="TechnologyCompletionProgress" Type="int" />
+    <Property Name="TechnologyCompletionGoal" Type="int" />
+    <Property Name="TechnologyType" Type="int" />
+  </EntityType>
+  <EntityType Name="Races">
+    <Key>
+      <PropertyRef Name="RaceID" />
+    </Key>
+    <Property Name="RaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RaceName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Technologies">
+    <Key>
+      <PropertyRef Name="TechnologyID" />
+    </Key>
+    <Property Name="TechnologyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TechnologyName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pswd" Type="varchar" MaxLength="50" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Cities__UserID__1209AD79">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__Build__1D7B6025">
+    <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+    <End Role="CitiesHaveBuildings" Type="Self.CitiesHaveBuildings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="CitiesHaveBuildings">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__CityI__16CE6296">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+    <End Role="CitiesHavePopulation" Type="Self.CitiesHavePopulation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CitiesHavePopulation">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__CityI__1C873BEC">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+    <End Role="CitiesHaveBuildings" Type="Self.CitiesHaveBuildings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CitiesHaveBuildings">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__CityI__22401542">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+    <End Role="CitiesHaveTechnology" Type="Self.CitiesHaveTechnology" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CitiesHaveTechnology">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__RaceI__17C286CF">
+    <End Role="Races" Type="Self.Races" Multiplicity="0..1" />
+    <End Role="CitiesHavePopulation" Type="Self.CitiesHavePopulation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Races">
+        <PropertyRef Name="RaceID" />
+      </Principal>
+      <Dependent Role="CitiesHavePopulation">
+        <PropertyRef Name="RaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CitiesHav__Techn__2334397B">
+    <End Role="Technologies" Type="Self.Technologies" Multiplicity="1" />
+    <End Role="CitiesHaveTechnology" Type="Self.CitiesHaveTechnology" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Technologies">
+        <PropertyRef Name="TechnologyID" />
+      </Principal>
+      <Dependent Role="CitiesHaveTechnology">
+        <PropertyRef Name="TechnologyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestCityModelStoreContainer">
+    <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CitiesHaveBuildings" EntityType="Self.CitiesHaveBuildings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CitiesHavePopulation" EntityType="Self.CitiesHavePopulation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CitiesHaveTechnology" EntityType="Self.CitiesHaveTechnology" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Races" EntityType="Self.Races" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Technologies" EntityType="Self.Technologies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cities__UserID__1209AD79" Association="Self.FK__Cities__UserID__1209AD79">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__Build__1D7B6025" Association="Self.FK__CitiesHav__Build__1D7B6025">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="CitiesHaveBuildings" EntitySet="CitiesHaveBuildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__CityI__16CE6296" Association="Self.FK__CitiesHav__CityI__16CE6296">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CitiesHavePopulation" EntitySet="CitiesHavePopulation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__CityI__1C873BEC" Association="Self.FK__CitiesHav__CityI__1C873BEC">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CitiesHaveBuildings" EntitySet="CitiesHaveBuildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__CityI__22401542" Association="Self.FK__CitiesHav__CityI__22401542">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CitiesHaveTechnology" EntitySet="CitiesHaveTechnology" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__RaceI__17C286CF" Association="Self.FK__CitiesHav__RaceI__17C286CF">
+      <End Role="Races" EntitySet="Races" />
+      <End Role="CitiesHavePopulation" EntitySet="CitiesHavePopulation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CitiesHav__Techn__2334397B" Association="Self.FK__CitiesHav__Techn__2334397B">
+      <End Role="Technologies" EntitySet="Technologies" />
+      <End Role="CitiesHaveTechnology" EntitySet="CitiesHaveTechnology" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

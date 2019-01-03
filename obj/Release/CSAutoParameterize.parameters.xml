@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TestCityDBModels-Web.config Connection String" description="TestCityDBModels Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.DBModel.csdl|res://*/Models.DBModel.ssdl|res://*/Models.DBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-7K4ID85\TEST;initial catalog=TestCity;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\David\ H\\Documents\\Visual\ Studio\ 2017\\Projects\\ORMTest\\WebAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TestCityDBModels']/@connectionString" />
+  </parameter>
+</parameters>

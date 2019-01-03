@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestCityModelStoreContainer" CdmEntityContainer="TestCityDBModels">
+    <EntitySetMapping Name="Buildings">
+      <EntityTypeMapping TypeName="TestCityModel.Building">
+        <MappingFragment StoreEntitySet="Buildings">
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+          <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="TestCityModel.City">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CitySize" ColumnName="CitySize" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CitiesHaveBuildings">
+      <EntityTypeMapping TypeName="TestCityModel.CitiesHaveBuilding">
+        <MappingFragment StoreEntitySet="CitiesHaveBuildings">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+          <ScalarProperty Name="BuildingValue" ColumnName="BuildingValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CitiesHavePopulations">
+      <EntityTypeMapping TypeName="TestCityModel.CitiesHavePopulation">
+        <MappingFragment StoreEntitySet="CitiesHavePopulation">
+          <ScalarProperty Name="PUID" ColumnName="PUID" />
+          <ScalarProperty Name="PUModifier" ColumnName="PUModifier" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CitiesHaveTechnologies">
+      <EntityTypeMapping TypeName="TestCityModel.CitiesHaveTechnology">
+        <MappingFragment StoreEntitySet="CitiesHaveTechnology">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="TechnologyID" ColumnName="TechnologyID" />
+          <ScalarProperty Name="TechnologyBoolStatus" ColumnName="TechnologyBoolStatus" />
+          <ScalarProperty Name="TechnologyCompletionProgress" ColumnName="TechnologyCompletionProgress" />
+          <ScalarProperty Name="TechnologyCompletionGoal" ColumnName="TechnologyCompletionGoal" />
+          <ScalarProperty Name="TechnologyType" ColumnName="TechnologyType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Races">
+      <EntityTypeMapping TypeName="TestCityModel.Race">
+        <MappingFragment StoreEntitySet="Races">
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+          <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Technologies">
+      <EntityTypeMapping TypeName="TestCityModel.Technology">
+        <MappingFragment StoreEntitySet="Technologies">
+          <ScalarProperty Name="TechnologyID" ColumnName="TechnologyID" />
+          <ScalarProperty Name="TechnologyName" ColumnName="TechnologyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TestCityModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Pswd" ColumnName="Pswd" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
