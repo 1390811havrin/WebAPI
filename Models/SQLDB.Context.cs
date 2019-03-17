@@ -13,10 +13,10 @@ namespace WebAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestCityDBModels : DbContext
+    public partial class TestCityEntities4 : DbContext
     {
-        public TestCityDBModels()
-            : base("name=TestCityDBModels")
+        public TestCityEntities4()
+            : base("name=TestCityEntities4")
         {
         }
     
@@ -26,12 +26,6 @@ namespace WebAPI.Models
         }
     
         public virtual DbSet<Building> Buildings { get; set; }
-        public virtual DbSet<City> Cities { get; set; }
-        public virtual DbSet<CitiesHaveBuilding> CitiesHaveBuildings { get; set; }
-        public virtual DbSet<CitiesHavePopulation> CitiesHavePopulations { get; set; }
-        public virtual DbSet<CitiesHaveTechnology> CitiesHaveTechnologies { get; set; }
-        public virtual DbSet<Race> Races { get; set; }
-        public virtual DbSet<Technology> Technologies { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

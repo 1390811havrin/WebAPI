@@ -102,3 +102,6 @@ C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\obj\Releas
 C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\obj\Release\WebAPI.csproj.CopyComplete
 C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\obj\Release\WebAPI.dll
 C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\obj\Release\WebAPI.pdb
+C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\bin\IsolatedTestingOfVDP.exe
+C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\bin\IsolatedTestingOfVDP.pdb
+C:\Users\David H\Documents\Visual Studio 2017\Projects\ORMTest\WebAPI\bin\IsolatedTestingOfVDP.exe.config

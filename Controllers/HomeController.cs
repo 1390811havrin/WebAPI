@@ -7,7 +7,7 @@ using System.Web.Http.Cors;
 
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://dndhbmacroscalemanager.com/Hawkmenrise/CitySimulatorTest/html/MainPage.html", "*", "*")]
+    [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class HomeController : Controller
     {
         public ActionResult Index()

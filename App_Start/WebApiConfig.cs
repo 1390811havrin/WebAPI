@@ -12,6 +12,7 @@ namespace WebAPI
         public static void Register(HttpConfiguration config)
         {
             config.EnableCors();
+
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);

@@ -7,9 +7,10 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
+    [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class ValuesController : ApiController
     {
+
         // GET api/values
         public IEnumerable<string> Get()
         {

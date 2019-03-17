@@ -11,12 +11,13 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WebAPI.Models;
 
+
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
+    [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class BuildingsController : ApiController
     {
-        private TestCityDBModels db = new TestCityDBModels();
+        private TestCityEntities4 db = new TestCityEntities4();
 
         // GET: api/Buildings
         public IQueryable<Building> GetBuildings()
@@ -82,7 +83,22 @@ namespace WebAPI.Controllers
             }
 
             db.Buildings.Add(building);
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (BuildingExists(building.BuildingID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = building.BuildingID }, building);
         }
@@ -116,5 +132,9 @@ namespace WebAPI.Controllers
         {
             return db.Buildings.Count(e => e.BuildingID == id) > 0;
         }
+
+
+       
+
     }
 }

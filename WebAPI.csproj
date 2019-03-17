@@ -196,56 +196,33 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
-    <Compile Include="Controllers\CitiesController.cs" />
-    <Compile Include="Controllers\CitiesHaveBuildingsController.cs" />
-    <Compile Include="Controllers\CitiesHavePopulationsController.cs" />
-    <Compile Include="Controllers\CitiesHaveTechnologiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RacesController.cs" />
-    <Compile Include="Controllers\TechnologiesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VDPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Building.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>SQLDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CitiesHaveBuilding.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CitiesHavePopulation.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CitiesHaveTechnology.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\City.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.Context.cs">
+    <Compile Include="Models\SQLDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.Context.tt</DependentUpon>
+      <DependentUpon>SQLDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBModel.cs">
+    <Compile Include="Models\SQLDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>SQLDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBModel.Designer.cs">
+    <Compile Include="Models\SQLDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Race.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Technology.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>SQLDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>SQLDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -258,15 +235,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DBModel.Context.tt">
+    <Content Include="Models\SQLDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
-      <DependentUpon>DBModel.edmx</DependentUpon>
+      <DependentUpon>SQLDB.edmx</DependentUpon>
+      <LastGenOutput>SQLDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBModel.tt">
+    <Content Include="Models\SQLDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.cs</LastGenOutput>
+      <DependentUpon>SQLDB.edmx</DependentUpon>
+      <LastGenOutput>SQLDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -292,12 +269,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\DBModel.edmx">
+    <EntityDeploy Include="Models\SQLDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SQLDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
+    <Content Include="Models\SQLDB.edmx.diagram">
+      <DependentUpon>SQLDB.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml">
       <SubType>Designer</SubType>
@@ -309,7 +286,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -326,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\VDP\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -358,6 +338,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\IsolatedTestingOfVDP\IsolatedTestingOfVDP\IsolatedTestingOfVDP.csproj">
+      <Project>{4cc9defe-7c73-43cf-95ec-06d44b787ba0}</Project>
+      <Name>IsolatedTestingOfVDP</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

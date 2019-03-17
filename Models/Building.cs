@@ -14,16 +14,13 @@ namespace WebAPI.Models
     
     public partial class Building
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Building()
-        {
-            this.CitiesHaveBuildings = new HashSet<CitiesHaveBuilding>();
-        }
-    
         public int BuildingID { get; set; }
+        public string BuildingType { get; set; }
+        public Nullable<int> BuildingLevel { get; set; }
         public string BuildingName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        private ICollection<CitiesHaveBuilding> CitiesHaveBuildings { get; set; }
+        public Nullable<int> X { get; set; }
+        public Nullable<int> Y { get; set; }
+        public Nullable<int> BuildingCost { get; set; }
+        public Nullable<int> UserID { get; set; }
     }
 }

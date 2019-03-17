@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestCityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="Security" Type="Int32" />
+    <Property Name="Reknown" Type="Int32" />
+    <Property Name="CivilianPopulation" Type="Int32" />
+    <Property Name="FoodProduced" Type="Int32" />
+    <Property Name="MagicProduced" Type="Int32" />
+    <Property Name="TechProduced" Type="Int32" />
+    <Property Name="FoodStored" Type="Int32" />
+    <Property Name="TotalStorage" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Cities_Users" FromRole="Cities" ToRole="Users" />
+    <NavigationProperty Name="CompletedProjects" Relationship="Self.FK_CompletedProjects_Cities" FromRole="Cities" ToRole="CompletedProjects" />
+    <NavigationProperty Name="CurrentProjects" Relationship="Self.FK_CurrentProjects_Cities" FromRole="Cities" ToRole="CurrentProjects" />
+  </EntityType>
+  <EntityType Name="CityMap">
+    <Key>
+      <PropertyRef Name="CityMapID" />
+    </Key>
+    <Property Name="CityMapID" Type="Int32" Nullable="false" />
+    <Property Name="X" Type="Int32" />
+    <Property Name="Y" Type="Int32" />
+    <Property Name="BuildingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingLevel" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_CityMaps_CityMaps" FromRole="CityMaps" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="CompletedProject">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+    </Key>
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="ProjectType" Type="Int32" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="Self.FK_CompletedProjects_Cities" FromRole="CompletedProjects" ToRole="Cities" />
+  </EntityType>
+  <EntityType Name="CurrentProject">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+    </Key>
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="ObjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectProperty1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectProperty2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectProperty3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectProperty4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectProperty5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TimeRemaining" Type="Int32" />
+    <Property Name="ProjectType" Type="Int32" />
+    <Property Name="CityID" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="Self.FK_CurrentProjects_Cities" FromRole="CurrentProjects" ToRole="Cities" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_Users" FromRole="Users" ToRole="Cities" />
+    <NavigationProperty Name="CityMaps" Relationship="Self.FK_CityMaps_CityMaps" FromRole="Users" ToRole="CityMaps" />
+  </EntityType>
+  <Association Name="FK_Cities_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompletedProjects_Cities">
+    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+    <End Role="CompletedProjects" Type="Self.CompletedProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CompletedProjects">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrentProjects_Cities">
+    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+    <End Role="CurrentProjects" Type="Self.CurrentProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="CurrentProjects">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CityMaps_CityMaps">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="CityMaps" Type="Self.CityMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="CityMaps">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestCityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="CityMaps" EntityType="Self.CityMap" />
+    <EntitySet Name="CompletedProjects" EntityType="Self.CompletedProject" />
+    <EntitySet Name="CurrentProjects" EntityType="Self.CurrentProject" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Cities_Users" Association="Self.FK_Cities_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompletedProjects_Cities" Association="Self.FK_CompletedProjects_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CompletedProjects" EntitySet="CompletedProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrentProjects_Cities" Association="Self.FK_CurrentProjects_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CurrentProjects" EntitySet="CurrentProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CityMaps_CityMaps" Association="Self.FK_CityMaps_CityMaps">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CityMaps" EntitySet="CityMaps" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestCityModelStoreContainer" CdmEntityContainer="TestCityEntities">
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="TestCityModel.City">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Security" ColumnName="Security" />
+          <ScalarProperty Name="Reknown" ColumnName="Reknown" />
+          <ScalarProperty Name="CivilianPopulation" ColumnName="CivilianPopulation" />
+          <ScalarProperty Name="FoodProduced" ColumnName="FoodProduced" />
+          <ScalarProperty Name="MagicProduced" ColumnName="MagicProduced" />
+          <ScalarProperty Name="TechProduced" ColumnName="TechProduced" />
+          <ScalarProperty Name="FoodStored" ColumnName="FoodStored" />
+          <ScalarProperty Name="TotalStorage" ColumnName="TotalStorage" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CityMaps">
+      <EntityTypeMapping TypeName="TestCityModel.CityMap">
+        <MappingFragment StoreEntitySet="CityMaps">
+          <ScalarProperty Name="CityMapID" ColumnName="CityMapID" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+          <ScalarProperty Name="BuildingType" ColumnName="BuildingType" />
+          <ScalarProperty Name="BuildingLevel" ColumnName="BuildingLevel" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompletedProjects">
+      <EntityTypeMapping TypeName="TestCityModel.CompletedProject">
+        <MappingFragment StoreEntitySet="CompletedProjects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CurrentProjects">
+      <EntityTypeMapping TypeName="TestCityModel.CurrentProject">
+        <MappingFragment StoreEntitySet="CurrentProjects">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+          <ScalarProperty Name="ObjectProperty1" ColumnName="ObjectProperty1" />
+          <ScalarProperty Name="ObjectProperty2" ColumnName="ObjectProperty2" />
+          <ScalarProperty Name="ObjectProperty3" ColumnName="ObjectProperty3" />
+          <ScalarProperty Name="ObjectProperty4" ColumnName="ObjectProperty4" />
+          <ScalarProperty Name="ObjectProperty5" ColumnName="ObjectProperty5" />
+          <ScalarProperty Name="TimeRemaining" ColumnName="TimeRemaining" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TestCityModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

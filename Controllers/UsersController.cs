@@ -13,32 +13,15 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public struct UsersData
-    {
-        public int UserID;
-        public string UserPassword;
-        public string UserName;
-    }
-    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
+    [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class UsersController : ApiController
     {
-
-        private TestCityDBModels db = new TestCityDBModels();
+        private TestCityEntities4 db = new TestCityEntities4();
 
         // GET: api/Users
-        public List<UsersData> GetUsers()
+        public IQueryable<User> GetUsers()
         {
-
-            List<UsersData> Users = new List<UsersData>();
-            foreach(var Element in db.Users)
-            {
-                UsersData UD = new UsersData();
-                UD.UserID = Element.UserID;
-                UD.UserName = Element.Username;
-                UD.UserPassword = Element.Pswd;
-                Users.Add(UD);
-            }
-            return Users;
+            return db.Users;
         }
 
         // GET: api/Users/5
