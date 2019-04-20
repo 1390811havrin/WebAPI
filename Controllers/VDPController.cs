@@ -17,6 +17,7 @@ namespace WebAPI.Controllers
         private TestCityEntities4 db = new TestCityEntities4();
 
         //PutBuildingToMap /api/VDP/1
+        //Takes building ID from SQL then references that buildings SQL parameters to generate a building.
         [HttpPut]
         public void PutBuildingToMap(int id)
         {

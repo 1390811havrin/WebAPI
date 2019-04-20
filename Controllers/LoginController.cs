@@ -14,18 +14,17 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     [EnableCors("http://127.0.0.1:5500", "*", "*")]
-    public class UsersController : ApiController
+    public class LoginController : ApiController
     {
         private TestCityEntities4 db = new TestCityEntities4();
 
-        // GET: api/Users
+        // GET: api/Login
         public IQueryable<User> GetUsers()
         {
             return db.Users;
         }
 
-  
-        // GET: api/Users/5
+        // GET: api/Login/5
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)
         {
@@ -38,7 +37,7 @@ namespace WebAPI.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Login/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
         {
@@ -73,27 +72,39 @@ namespace WebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-       
-
-
-
-
-  // POST: api/Users
-  [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Post(User user)
         {
-            if (!ModelState.IsValid)
+
+            var users = from us in db.Users
+                        where us.Email == user.Email
+                        select us;
+            if (users.Count() == 0 || users == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
+            else if (users.Count() >= 1)
+            {
+                var suser = from us in users
+                            where us.PSW == user.PSW
+                            select us;
+                if (suser.Count() >= 1)
+                {
+                    return Ok(suser.First().UserID);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
 
-            db.Users.Add(user);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
+            }
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Login/5
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
         {
