@@ -17,12 +17,27 @@ namespace WebAPI.Controllers
     [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class BuildingsController : ApiController
     {
-        private TestCityEntities4 db = new TestCityEntities4();
+        private TestCityEntities9 db = new TestCityEntities9();
 
         // GET: api/Buildings
         public IQueryable<Building> GetBuildings()
         {
             return db.Buildings;
+        }
+
+        [ResponseType(typeof(int))]
+        public IHttpActionResult GetBuilding(int uID, string type)
+        {
+            var results = from bld in db.Buildings where bld.UserID == uID && bld.BuildingType == type select bld;
+            var resCount = results.Sum(x => x.BuildingLevel);
+            if(resCount != null)
+            {
+                return Ok(resCount);
+            }
+            else
+            {
+                return Ok(0);
+            }
         }
 
         // GET: api/Buildings/5

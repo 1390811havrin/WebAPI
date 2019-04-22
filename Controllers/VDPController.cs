@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class VDPController : ApiController
     {
-        private TestCityEntities4 db = new TestCityEntities4();
+        private TestCityEntities9 db = new TestCityEntities9();
 
         //PutBuildingToMap /api/VDP/1
         //Takes building ID from SQL then references that buildings SQL parameters to generate a building.

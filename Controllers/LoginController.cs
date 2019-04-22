@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
     [EnableCors("http://127.0.0.1:5500", "*", "*")]
     public class LoginController : ApiController
     {
-        private TestCityEntities4 db = new TestCityEntities4();
+        private TestCityEntities9 db = new TestCityEntities9();
 
         // GET: api/Login
         public IQueryable<User> GetUsers()
