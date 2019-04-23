@@ -28,13 +28,13 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Date))]
         public IHttpActionResult GetDate(int id)
         {
-            Date date = db.Dates.Find(id);
-            if (date == null)
+            var dates = from dt in db.Dates where dt.UID == id select dt;
+            if(dates.Count() >= 1)
             {
-                return NotFound();
+                Date date = dates.First();
+                return Ok(date);
             }
-
-            return Ok(date);
+                return NotFound();
         }
 
         // PUT: api/Dates/5

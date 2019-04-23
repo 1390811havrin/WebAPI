@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
                 persistentSum.Gold = result.First().Gold;
                 persistentSum.RareResources = result.First().RareResources;
                 persistentSum.UID = result.First().UID;
-
+                persistentSum.ID = result.First().ID;
                 return Ok(persistentSum);
             }
             return NotFound();

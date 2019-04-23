@@ -92,9 +92,11 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Building))]
         public IHttpActionResult PostBuilding(Building building)
         {
+            Building defBld = new Building();
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                defBld.BuildingName = "Bad Model State";
+                return Ok(defBld);
             }
 
             db.Buildings.Add(building);

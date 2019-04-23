@@ -19,14 +19,23 @@ namespace WebAPI.Controllers
         //PutBuildingToMap /api/VDP/1
         //Takes building ID from SQL then references that buildings SQL parameters to generate a building.
         [HttpPut]
-        public void PutBuildingToMap(int id)
+        [ResponseType(typeof(int))]
+        public IHttpActionResult PutBuildingToMap(int id)
         {
-            Building building = db.Buildings.Find(id);
+            try
+            {
+                Building building = db.Buildings.Find(id);
 
-            string buildingToString = building.UserID.ToString() + "," + building.BuildingName.ToString() + "," + building.BuildingType.ToString() + "," + building.BuildingLevel + "," + building.X.ToString() + "," + building.Y.ToString();
-            string[] buildingStringArr = new string[1];
-            buildingStringArr[0] = buildingToString;
-            VDPProgram.Main(buildingStringArr);
+                string buildingToString = building.UserID.ToString() + "," + building.BuildingName.ToString() + "," + building.BuildingType.ToString() + "," + building.BuildingLevel + "," + building.X.ToString() + "," + building.Y.ToString();
+                string[] buildingStringArr = new string[1];
+                buildingStringArr[0] = buildingToString;
+                VDPProgram.Main(buildingStringArr);
+                return Ok(1);
+            }
+            catch
+            {
+                return Ok(0);
+            }
         }
 
         //Doesn't delete the SQL building. Merely covers it's location with plain grass. 
@@ -34,13 +43,14 @@ namespace WebAPI.Controllers
         [HttpDelete]
         public void DeleteBuildingFromMap(int id)
         {
+            //[ int ownerID, string buildingName, int buildingType, int buildingLevel, int x, int y]
             Building building = db.Buildings.Find(id);
             if(building == null)
             {
                 return;
             }
             //"1,Baracks,1,1,7,9";
-            string buildingToString =  "1,Grass,1,1," + building.X.ToString() + "," + building.Y.ToString();
+            string buildingToString = building.UserID + ",Grass,Default,1," + building.X.ToString() + "," + building.Y.ToString();
             string[] buildingStringArr = new string[1];
             buildingStringArr[0] = buildingToString;
             VDPProgram.Main(buildingStringArr);
@@ -51,15 +61,16 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Building))]
         public IHttpActionResult GetBuildingDetailsFromMap(int x, int y, int UID)
         {
+            Building bd1 = new Building();
+            bd1.BuildingName = "NA";
             var buildings = from building in db.Buildings where building.UserID == UID && building.Y == y && building.X == x select building;
-            Building exactBuilding = buildings.First();
-
-            if (exactBuilding == null)
+            if (buildings.Count() >= 1)
             {
-                return NotFound();
-            }
+                Building exactBuilding = buildings.First();
 
-            return Ok(exactBuilding);
+                return Ok(exactBuilding);
+            }
+            return Ok(bd1);
         }
 
     }

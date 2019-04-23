@@ -90,18 +90,23 @@ namespace WebAPI.Controllers
 
         // DELETE: api/People/5
         [ResponseType(typeof(People))]
-        public IHttpActionResult DeletePeople(int id)
+        public IHttpActionResult DeletePeople(int UID)
         {
-            People people = db.Peoples.Find(id);
-            if (people == null)
+            People allGone = new People();
+            allGone.RaceID = 100;
+            var populi = from pop in db.Peoples where pop.UID == UID select pop;
+            if(populi.Count() >= 1)
             {
-                return NotFound();
+                People people = populi.First();
+
+                db.Peoples.Remove(people);
+                db.SaveChanges();
+
+                return Ok(people);
+
             }
-
-            db.Peoples.Remove(people);
-            db.SaveChanges();
-
-            return Ok(people);
+            return Ok(allGone);
+           
         }
 
         protected override void Dispose(bool disposing)
