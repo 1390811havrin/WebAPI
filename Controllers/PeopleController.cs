@@ -13,7 +13,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://127.0.0.1:5500", "*", "*")]
+    //[EnableCors("http://127.0.0.1:5500", "*", "*")]
+    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
     public class PeopleController : ApiController
     {
         private TestCityEntities9 db = new TestCityEntities9();
@@ -32,7 +33,7 @@ namespace WebAPI.Controllers
             var people = from pp in db.Peoples where pp.UID == id select pp;
             if (people.Count() < 1)
             {
-                return NotFound();
+                return Ok(0);
             }
 
             return Ok(people.Count());

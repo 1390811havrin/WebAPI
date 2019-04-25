@@ -12,10 +12,13 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WebAPI.Models;
+using System.Web.Configuration;
+
 
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://127.0.0.1:5500", "*", "*")]
+    //[EnableCors("http://127.0.0.1:5500", "*", "*")]
+    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
     public class ImageController : ApiController
     {
         private TestCityEntities9 db = new TestCityEntities9();
@@ -33,23 +36,23 @@ namespace WebAPI.Controllers
                 if (buildings.Count() > 1)
                 {
                     string user = "User" + cUID;
-                    var streamE = File.OpenRead(@"C:\Users\David H\Documents\Visual Studio 2017\Projects\IsolatedTestingOfVDP\IsolatedTestingOfVDP\ForSaving\" + user + ".jpg");
+                    var streamE = File.OpenRead(@WebConfigurationManager.AppSettings["ForSaving"] + user + ".png");
 
                     var response1 = new HttpResponseMessage(HttpStatusCode.OK);
                     response1.Content = new StreamContent(streamE);
 
-                    response1.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
+                    response1.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
                     response1.Content.Headers.ContentLength = streamE.Length;
 
                     return ResponseMessage(response1);
                 }
             }
-            var stream = File.OpenRead(@"C:\Users\David H\Documents\Visual Studio 2017\Projects\IsolatedTestingOfVDP\IsolatedTestingOfVDP\DefaultImage\editedfullmap.jpg");
+            var stream = File.OpenRead(@WebConfigurationManager.AppSettings["Default"]);
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new StreamContent(stream);
 
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
             response.Content.Headers.ContentLength = stream.Length;
 
             return ResponseMessage(response);

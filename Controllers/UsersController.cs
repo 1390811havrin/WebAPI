@@ -13,7 +13,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://127.0.0.1:5500", "*", "*")]
+    //[EnableCors("http://127.0.0.1:5500", "*", "*")]
+    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
     public class UsersController : ApiController
     {
         private TestCityEntities9 db = new TestCityEntities9();
@@ -84,51 +85,6 @@ namespace WebAPI.Controllers
             db.Users.Add(user);
             db.SaveChanges();
 
-            var results = from usr in db.Users
-                          where usr.Email == user.Email && usr.PSW == user.PSW
-                          select usr;
-            int uID = results.First().UserID;
-            #region Date Stuff
-            Date date = new Date();
-            date.UID = uID;
-            date.Date1 = 0;
-            db.Dates.Add(date);
-            #endregion
-            #region People Stuff
-            People people = new People();
-            people.RaceID = 1;
-            people.UID = uID;
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            db.Peoples.Add(people);
-            db.SaveChanges();
-            #endregion
-            #region persistent Stuff
-            PersistentSum persistentSum = new PersistentSum();
-            persistentSum.UID = uID;
-            persistentSum.Food = 10;
-            persistentSum.Gold = 1000;
-            persistentSum.RareResources = 0;
-            db.PersistentSums.Add(persistentSum);
-            #endregion
-
-            db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
         }
 

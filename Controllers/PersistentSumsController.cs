@@ -13,7 +13,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [EnableCors("http://127.0.0.1:5500", "*", "*")]
+    //[EnableCors("http://127.0.0.1:5500", "*", "*")]
+    [EnableCors("http://dndhbmacroscalemanager.com", "*", "*")]
     public class PersistentSumsController : ApiController
     {
         private TestCityEntities9 db = new TestCityEntities9();
